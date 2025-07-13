@@ -1,0 +1,148 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+% \usepackage{vartau}
+\newcommand{\p}[1]{\left(#1\right)}
+\newcommand{\braket}[1]{\langle#1\rangle}
+\newcommand{\bra}[1]{|#1\rangle}
+\newcommand{\ket}[1]{\langle#1|}
+
+\title{PHYS417HW6}
+\author{Aidan Gardner-O'Kearny}
+\date{May 2025}
+
+\begin{document}
+
+\maketitle
+
+This one was also a bit of a weird one.
+
+\section*{1)}
+
+Given the publicly known key $P=997$
+
+\subsection*{a)}
+$N=231$, so $X$ is
+
+\begin{align*}
+    X&=2^{231}\text{mod}(997)\\[1em]
+    &=72
+\end{align*}
+
+\subsection*{b)}
+With $M=337$, we have
+
+\begin{align*}
+    Y&=2^{373}\text{mod}(997)\\[1em]
+    &=80
+\end{align*}
+
+
+\subsection*{c)}
+% The simplest way to do this is going to be proving that these numbers are generically the same no matter what inputs we used for $N,M$ or $P$. If we have two numbers $N$ and $M$, we can write those as $n_WP+n_R$ and $m_WP+m_R$. It is obvious that $M\text{mod}(P)=m_R\text{mod}(P)=m_R-P$. Because of this, when we calculate $K$;
+
+% \begin{align*}
+%     K=X^{M}\text{mod}(P)=(n_R-P)^{m}\text{mod}(P)
+% \end{align*}
+
+I'll be real, I calculated the previous mod functions using Desmos. Desmos is blowing up when I try to calculate $K_1$ or $K_2$.
+
+\subsection*{d)}
+To convert to binary, we will use 10 bits, and essentially flip $0$'s to $1$'s from left to right such that we don't get any bigger sum than our target number. I unfortunately do not have the number, but it shouldn't have been that bad to calculate.
+
+
+\section*{2)}
+Given $\hat{\pi}=\hat{p}+e\hat{A}$ and $\hat{\tilde{\pi}}=\hat{p}-e\hat{A}$
+
+And $\hat{a}=\frac{\ell_B}{\sqrt{2}\hbar}\p{\pi_x-i\pi_y}$ and $\hat{b}=\frac{\ell_B}{\sqrt{2}\hbar}\p{\tilde{\pi}_x-i\tilde{\pi}_y}$
+
+$\vec{A}=\frac{B}{2}[-y\vec{e}_x+x\vec{e}_y]$
+
+So;
+
+\begin{align*}
+    \pi_x&=p_x-\frac{eB}{2}y\\[1em]
+    \pi_y&=p_y+\frac{eB}{2}x\\[1em]
+    \tilde{\pi}_x&=p_x+\frac{eB}{2}y\\[1em]
+    \tilde{\pi}_y&=p_y-\frac{eB}{2}x
+\end{align*}
+
+\subsection*{a)}
+
+$L_z=xp_y-yp_x$
+
+Rewriting the $\pi$ operators in terms of the more familiar position and momentum (really just adding things together), we get
+
+\begin{align*}
+    p_x&=\frac{\pi_x+\tilde{{\pi}_x}}{2}\\[1em]
+    x&=\frac{\pi_y-\tilde{\pi}_y}{eB}\\[1em]
+    p_y&=\frac{\pi_y+\tilde{\pi}_y}{2}\\[1em]
+    y&=\frac{-\pi_x+\tilde{\pi}_x}{eB}
+\end{align*}
+
+Which means that
+
+\begin{align*}
+    L_z&=\p{\frac{\pi_y-\tilde{\pi}_y}{eB}}\p{\frac{\pi_y+\tilde{\pi}_y}{2}}-\p{\frac{-\pi_x+\tilde{\pi}_x}{eB}}\p{\frac{\pi_x+\tilde{{\pi}_x}}{2}}\\[1em]
+    &=\p{\frac{\pi_y^2-\tilde{\pi}_y^2}{2eB}}-\p{\frac{-\pi_x^2+\tilde{\pi}_x^2}{2eB}}\\[1em]
+    &=\frac{\pi_y^2-\tilde{\pi}_y^2+\pi_x^2-\tilde{\pi}_x^2}{2eB}\\[1em]
+    &=\hbar\p{a^{\dagger}a-b^{\dagger}b}
+\end{align*}
+
+When we throw this at a state $\bra{n,m}$, we will get
+
+\begin{align*}
+    \hbar\p{a^{\dagger}a-b^{\dagger}b}\bra{n,m}=\hbar(n-m)\bra{n,m}
+\end{align*}
+
+and so the expectation value is simply
+
+\begin{align*}
+    \braket{n,m|L_z|n,m}=\hbar(n-m)
+\end{align*}
+
+\subsection*{b)}
+
+We can do a similar sort of trick to calculate $K_z$.
+
+If $K_z=(\vec{r}\times\vec{\pi}))_z=x\pi_y-y\pi_x$, which has the same form as $L_z=(\vec{r}\times\vec{p})_z$. So then, 
+
+\begin{align*}
+    K_z&=x\pi_y-y\pi_x\\[1em]
+    &=\pi_y\p{\frac{\pi_y-\tilde{\pi}_y}{eB}}-\pi_x\p{\frac{-\pi_x+\tilde{\pi}_x}{eB}}\\[1em]
+    &=\frac{\pi_y^2-\pi_y\tilde{\pi}_y+\pi_x^2-\pi_x\tilde{\pi}_x}{eB}\\[1em]
+    &=2\hbar\p{a^{\dagger}a}+\frac{-\pi_x\tilde{\pi}_x-\pi_y\tilde{\pi}_y}{eB}\\[1em]
+    &=\hbar\p{2a^{\dagger}a-ab-a^{\dagger}b^{\dagger}}
+\end{align*}
+
+If we throw this at a state, we get
+
+\begin{align*}
+    \hbar\p{2a^{\dagger}a-ab-a^{\dagger}b^{\dagger}}\bra{n,m}=\hbar\p{2n\bra{n,m}+\sqrt{nm}\bra{n-1,m-1}+\sqrt{(n+1)(m+1)}\bra{n+1,m+1}}
+\end{align*}
+
+The latter terms of which will be orthogonal with the state $\bra{n,m}$. The expectation value is thus
+
+\begin{align*}
+    \braket{n,m|K_z|n,m}=2\hbar{n}
+\end{align*}
+
+\subsection*{c)}
+For coherent states $\alpha,\beta$ we can plug it into $L_z$ and $K_z$ and all that will really be different is the coefficients. Because of how the interaction between our operators and the coherent states are defined, we will get
+
+\begin{align*}
+    &\hbar\p{a^{\dagger}a-b^{\dagger}b}\bra{\alpha}\bra{\beta}=\hbar\p{|\alpha|^2\bra{\alpha}-|\beta|^2\bra{\beta}}\\[1em]
+    &\braket{\alpha,\beta|L_z|\alpha,\beta}=\hbar\p{|\alpha|^2-|\beta|^2}
+\end{align*}
+
+and
+
+\begin{align*}
+    &\hbar\p{2a^{\dagger}a-ab-a^{\dagger}b^{\dagger}}\bra{\alpha}\bra{\beta}=\hbar\p{2|\alpha|^2\bra{\alpha}\bra{\beta}-2\alpha\beta\bra{\alpha}\bra{\beta}}\\[1em]
+    &\braket{\alpha,\beta|K_z|\alpha,\beta}=2\hbar\p{|\alpha|^2-\alpha\beta}
+\end{align*}
+
+I'll be real, not sure of the physical significance of this result.
+
+
+\end{document}
