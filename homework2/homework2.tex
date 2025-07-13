@@ -1,0 +1,304 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{PHYS 417 HW 2}
+\author{Aidan Gardner-O'Kearny}
+\date{April 2025}
+\usepackage{amsmath}
+% \usepackage{vartau}
+\newcommand{\p}[1]{\left(#1\right)}
+\newcommand{\braket}[1]{\langle#1\rangle}
+\newcommand{\bra}[1]{|#1\rangle}
+\newcommand{\ket}[1]{\langle#1|}
+
+\begin{document}
+
+\maketitle
+
+\section*{1)}
+
+We have the Hamiltonian
+
+\begin{align*}
+    \hat{H}=-\frac{\hbar^2}{2m}\frac{d^2}{dx^2}+\frac{1}{2}k(t)x^2\quad\text{With}\\[1em]
+    k(t)=\begin{cases}
+        k_0+\epsilon{k_0}\sin(\Omega{t})\quad&{t>0}\\[1em]
+        k_0\quad&{t\leq0}
+    \end{cases}
+\end{align*}
+
+We are given eigenenergies for our unperturbed Hamiltonian of the form;
+
+\begin{align*}
+    E_{n}=\hbar\omega\p{n+\frac{1}{2}}
+\end{align*}
+
+\subsection*{a)}
+At $t=0$ $k(t)=k_0$. At that time it's just a QHO so we can relate $\omega, k_0$ and $m$.
+
+\begin{align*}
+    k_0&=m\omega^2\\[1em]
+    \omega&=\sqrt{\frac{k_0}{m}}
+\end{align*}
+
+% Or, for $t>0$
+% \begin{align*}
+%     \omega&=\sqrt\frac{k_0\p{1+\epsilon\sin\p{\Omega{t}}}}{m}
+% \end{align*}
+
+% Which I'm just now noticing is true \textit{at} $t=0$ as well.
+
+\subsection*{b)}
+To rewrite $\hat{H_0}$ in terms of the ladder operators, we just do the following;
+
+\begin{align*}
+    \hat{H}_0&=\frac{\hat{p}^2}{2m}+\frac{1}{2}m\omega^2\hat{x}^2\\[1em]
+    &=\frac{1}{2m}\p{-\frac{\hbar{m}\omega}{2}\p{\hat{a}_{+}^2+\hat{a}_{-}^2-\hat{a}_{+}\hat{a}_{-}-\hat{a}_{0}\hat{a}_{+}}}+\frac{m\omega^2}{2}\p{\frac{\hbar}{2m\omega}\p{\hat{a}_{+}^2+\hat{a}_{-}^2+\hat{a}_{+}\hat{a}_{-}+\hat{a}_{0}\hat{a}_{+}}}\\[1em]
+    &=\frac{\hbar\omega}{4}\p{2\hat{a}_{+}\hat{a}_{-}+2\hat{a}_{-}\hat{a}_{+}}\quad[\hat{a}_{-},\hat{a}_{+}]=1\\[1em]
+    &=\hbar\omega\p{\frac{1}{2}\p{\hat{a}_{+}\hat{a}_{-}+\p{\hat{a}_{+}\hat{a}_{-}+1}}}\\[1em]
+    &=\hbar\omega\p{\hat{a}_{+}\hat{a}_{-}+\frac{1}{2}}\\[1em]
+    % &=\hbar\sqrt{\frac{k_0}{m}}\p{\hat{a}_{+}\hat{a}_{-}+\frac{1}{2}}
+\end{align*}
+
+So when it comes time to write $\hat{H}'(t)$ in terms of the ladder operators;
+
+\begin{align*}
+    \hat{H}'(t)&=\frac{1}{2}\epsilon{k_0}\sin\p{{\Omega{t}}}\hat{x}^2\\[1em]
+    &=\frac{\epsilon\hbar{k}_0}{4mw}\sin(\omega{t})(\hat{a}_{+}^2+\hat{a}_{-}^2+\hat{a}_{+}\hat{a}_{-}+\hat{a}_{-}\hat{a}_{+})\\[1em]
+    &=\frac{\epsilon\hbar\omega}{4}\sin(\omega{t})(\hat{a}_{+}^2+\hat{a}_{-}^2+\hat{a}_{+}\hat{a}_{-}+\hat{a}_{-}\hat{a}_{+})
+\end{align*}
+
+
+\subsection*{c)}
+
+Starting in the state $|0\rangle$ and then evolving to some time $t_0$, we are now allowed to exist in other states, with matrix elements; 
+
+% \begin{align*}
+%     c_n'(t)&=\frac{i}{\hbar}\int_{0}^{t}dt'\:e^{i\omega{t'}}\braket{n|H'(t')|m}\\[1em]
+%     &=\int_{0}^{t}dt'\:i\omega{e}^{i\omega{t'}}\braket{n|\p{\p{\hat{a}_+\hat{a}_-+\frac{1}{2}}+\p{\hat{a}_{+}^2+\hat{a}_{-}^2+\hat{a}_{+}\hat{a}_{-}+\hat{a}_{-}\hat{a}_{+}}}|m}\\[1em]
+%     % &=\int_{0}^{t}dt'\:i\omega{e}^{i\omega{t}'}\p{\frac{1}{2}+\sqrt{\p{m^2+m}}}{\braket{n|m}}
+% \end{align*}
+
+\begin{align*}
+    V_{nm}&={\hbar\omega}\braket{n|\p{\p{\hat{a}_+\hat{a}_-+\frac{1}{2}}+\frac{\epsilon}{4}\p{\hat{a}_{+}^2+\hat{a}_{-}^2+\hat{a}_{+}\hat{a}_{-}+\hat{a}_{-}\hat{a}_{+}}}|m}
+\end{align*}
+
+We can say that the $\hat{a}_{+}\hat{a}_-$ will only contribute nonzero terms when $m=n$. We can ignore those as we are only interested in transitions. The only two other terms are an $\hat{a}_+^2$ term and a $\hat{a}_-^2$ term. This implies you can go up and down two states at a time.
+
+To figure out the probabilities of jumping to these states, we can just use Griffiths eq 11.35
+
+\begin{align*}
+    |c_n(t)|^2\approx\frac{|V_{nm}|^2}{\hbar^2}\frac{\sin^2\p{[\omega_0-\Omega]\frac{t}{2}}}{\p{\omega_0-\Omega}^2}
+\end{align*}
+
+Where $\omega_0$ is found from the energy difference of the two states. To go from $\bra{0}\rightarrow\bra{2}$ (and indeed for any transition in this system), the energy gap is $2\hbar\omega$, implying $\omega_0=2\sqrt{\frac{k_0}{m}}$
+
+Our matrix element $V_{20}$ (the only transition allowed starting from the ground state), will be
+
+\begin{align*}
+    V_{20}&=\frac{\epsilon\hbar\omega}{4}\braket{2|\hat{a_+^2}|0}\\[1em]
+    &=\frac{\epsilon\hbar\omega}{4}\p{\sqrt{1}\sqrt{2}}\\[1em]
+    &=\frac{\sqrt2\epsilon\hbar\omega}{4}
+\end{align*}
+
+Which means our probability is;
+
+\begin{align*}
+    |c_2(t)|^2\approx\frac{\epsilon^2k_0}{8m}\frac{\sin^2\p{[2\sqrt{\frac{k_0}{m}}-\Omega]\frac{t}{2}}}{\p{2\sqrt{\frac{k_0}{m}}-\Omega}^2}
+\end{align*}
+
+\subsection*{d)}
+
+When we start in state $\bra{3}$ we can go up to $\bra{5}$ or down to $\bra{1}$. The respective matrix elements are;
+
+\begin{align*}
+    V_{53}&=\frac{\epsilon\hbar\omega}{4}\braket{5|\hat{a}_{+}^2|3}\\[1em]
+    &=\frac{\epsilon\hbar\omega}{4}\p{\sqrt{4}\sqrt{5}}\\[1em]
+    &=\frac{\sqrt{5}\epsilon\hbar\omega}{\sqrt4}
+\end{align*}
+
+and 
+
+\begin{align*}
+    V_{13}&=\frac{\epsilon\hbar\omega}{4}\braket{1|\hat{a}_{-}^{2}|3}\\[1em]
+    &=\frac{\epsilon\hbar\omega}{4}\p{\sqrt{2}\sqrt{3}}\\[1em]
+    &=\frac{\sqrt{6}\epsilon\hbar\omega}{4}
+\end{align*}
+
+So thus the respective probabilities are going to be;
+
+\begin{align*}
+    |c_5(t)|^2\approx\frac{5\epsilon^{2}{k_0}}{4m}\frac{\sin^2\p{[2\sqrt{\frac{k_0}{m}}-\Omega]\frac{t}{2}}}{\p{2\sqrt{\frac{k_0}{m}}-\Omega}^2}
+\end{align*}
+
+and
+
+\begin{align*}
+    |c_{1}(t)|^2\approx\frac{3\epsilon^2k_0}{8m}\frac{\sin^2\p{[2\sqrt{\frac{k_0}{m}}-\Omega]\frac{t}{2}}}{\p{2\sqrt{\frac{k_0}{m}}-\Omega}^2}
+\end{align*}
+
+\subsection*{e)}
+
+To make this transition more efficient, our probabilities blow up when the denominator is very small. Using $\Omega$ as a lever, we can see that the denominator gets very small when $\Omega\approx2\sqrt{\frac{k_0}{m}}$.
+
+\section*{2)}
+
+Our perturbation is of the form
+
+\begin{align*}
+    \hat{H}'(t)=C\delta(x_1-x_2)e^{-t/\tau}
+\end{align*}
+
+\subsection*{a)}
+
+The $\delta$-function spits out something with units of $\frac{1}{\text{Length}}$ (discussed this on the last homework), so C must have units of $\text{Energy}\times\text{Length}$.
+
+\subsection*{b)}
+
+To calculate a probability, we say that, if we start in $\bra{1,1}$ (our ground state), and want to see if we evolve into $\bra{2, 2}$.
+
+We are going from state
+
+\begin{align*}
+    \psi&=\psi_1\psi_1=A\sin^2\p{\frac{\pi}{a}x}
+\end{align*}
+
+to state
+
+\begin{align*}
+    \psi&=\psi_2\psi_2=A\sin^2\p{\frac{2\pi}{a}x}
+\end{align*}
+
+With the total Hamiltonian
+
+\begin{align*}
+    \hat{H}(t)=\frac{\hat{p}^2}{2m}+C\delta(x_1-x_2)e^{-t/\tau}
+\end{align*}
+
+The energy of the two states are $E_{11}=\frac{\pi^2\hbar^2}{ma^2}$ and $E_{22}=\frac{4\pi^2\hbar^2}{ma^2}$ Which means $\hbar\omega_0=\frac{3\pi\hbar^2}{ma^2}$ and thus $\omega_0=\frac{3\pi\hbar}{ma^2}$
+
+This means we can calculate our coefficient $c_{22}'(t)$
+
+\begin{align*}
+    c_{22}'(t)&=\frac{-i}{\hbar}\int_{0}^{t}dt'\:e^{i\omega{t'}}\braket{\psi_{22}|H'(t)|\psi_{11}}\\[1em]
+    &=\frac{-i}{\hbar}\int_{0}^{t}dt'\:e^{i\omega{t'}}\int_{-a}^{a}dx\:\psi_{22}^{\star}H'(t)\psi_{11}
+\end{align*}
+
+That position integral is going to get its own section, here;
+
+
+\begin{align*}
+    &\int{dx}\:\psi_{22}^{\star}H(t)\psi_{11}\\[1em]
+    &\int_{-a}^{a}dx_{2}\:\int_{-a}^{a}dx_{1}\:\sin(\frac{2\pi}{a}x_1)\sin(\frac{2\pi}{a}x_2)\p{C\delta(x_1-x_2e)e^{-t/\tau}}\sin(\frac{\pi}{a}x_1)\sin(\frac{\pi}{a}x_2)\\[1em]
+    &C\int_{-a}^{a}dx_{2}\:\sin^2(\frac{2\pi}{a}x_2)\sin^2(\frac{\pi}{a}x_2)e^{-t/\tau}\\[1em]
+    &\frac{Ca}{2}e^{-t/\tau}\quad\text{Thank you interal-calculator.com}
+\end{align*}
+
+Now back to the main intergral.
+
+\begin{align*}
+    &=-\frac{iCa}{2\hbar}\int_{0}^{t}dt'e^{i\omega_0t'}e^{-t'/\tau}\\[1em]
+    &=-\frac{iCa}{2\hbar}\int_{0}^{t}dt'e^{-\frac{i\omega_0\tau-1}{\tau}t'}\\[1em]
+    &=\frac{iCa}{2\hbar}\frac{1-i\omega_0\tau}{\tau}\p{e^{-\frac{i\omega_0\tau-1}{\tau}t}-1}
+\end{align*}
+
+So $|c_{22}(t)|^2$ is;
+
+\begin{align*}
+    &\frac{C^2a^2}{4\hbar^2}\frac{1+\omega_0^2\tau^2}{\tau^2}\p{2-e^{-\frac{i\omega_0\tau-1}{\tau}t}-e^{\frac{i\omega_0\tau-1}{\tau}t}}\\[1em]
+    &\frac{C^2a^2}{2\hbar^2}\frac{1+\omega_0^2\tau^2}{\tau^2}\p{1-\cos(\frac{\omega_0\tau-1}{\tau}t)}
+\end{align*}
+
+This is awful to look at, but okay.
+
+\section*{3)}
+\subsection*{a)}
+The ratio of the two decay rates $\Gamma$ as a function of $\omega$ is the ratio of the coefficients $A$ and $R_{b\rightarrow{a}}$.
+
+\begin{align*}
+    A&=\frac{\omega_0^3}{3\pi\epsilon_0\hbar{c}^3}|q\braket{\psi_b|\boldsymbol{r}|\psi_a}|^2\\[1em]
+    R_{b\rightarrow{a}}&=\frac{\pi}{3\epsilon_0\hbar^2}|q\braket{\psi_b|\boldsymbol{r}|\psi_a}|^2\rho(\omega_0)\\[1em]
+    % \Gamma&=\frac{\omega_0^3\hbar}{\pi^2c^3\rho(\omega_0)}
+    \Gamma&=\frac{A}{B\rho(\omega_0)}
+\end{align*}
+
+This relationship is *cubic* in $\omega_0$, but also proportional to $1/c^3$. The temperature dependence will come from the term $\rho(\omega_0)$.
+
+\begin{align*}
+    \rho(\omega_0)&=\frac{A}{B}\frac{1}{e^{\hbar\omega_0/k_BT}-1}
+\end{align*}
+
+Which means that
+
+\begin{align*}
+    \Gamma&=\frac{1}{e^{\hbar\omega_0/k_BT}-1}
+\end{align*}
+
+\subsection*{b)}
+For this ratio to be 1
+
+\begin{align*}
+    1&=\frac{1}{e^{\hbar\omega_0/k_BT}-1}\\[1em]
+    {e^{\hbar\omega_0/k_BT}-1}&=1\\[1em]
+    {e^{\hbar\omega_0/k_BT}}&=2\\[1em]
+    \frac{\hbar\omega_0}{k_BT}&=\ln(2)\\[1em]
+    \omega_0&=\ln(2)\frac{k_BT}{\hbar}  
+\end{align*}
+
+Room temperature is $\approx300K$, which puts $\omega_0\approx10^{12}\text{ Hz}$, which puts us well into the infrared part of the spectrum.
+
+At visible light ranges $\omega_0\approx10^{15}\text{ Hz}$. The ratio of $A/B$ will be very low, as the exponent's argument $\omega_0\hbar/k_BT$ will be very large ($\approx160$). This indicates that the rate of stimulated emission will dominate over spontaneous emission.
+
+\section*{4)}
+Let's say we start an atom in the state $|n\ell{m}\rangle=|411\rangle$.
+
+\subsection*{a)}
+If we consider spontaneous emission of dipole photons, we can have the following decay paths. Based on the rules
+
+\begin{align*}
+    \Delta\ell_{}=\ell'-\ell=\pm1\\[1em]
+    \Delta{m}=m'-m=0\text{ or }\pm1
+\end{align*}
+
+We do have to also consider the old rules we have for orbital (Namely $\ell\geq{|m|}$ and of course $n>\ell$)
+
+The results of these rules can be seen from Griffiths Figure 11.9. The only way to go from $\bra{411}$ to $\bra{100}$ is via a direct jump or via a 3 step process $n=4\rightarrow3\rightarrow2\rightarrow1$
+
+Any even number of jumps (and thus photon emissions), is impossible. That would require a jump from either $\bra{31x}$ or $\bra{21x}$, both of which are impossible to get to in one step from $\bra{411}$.
+
+\subsection*{b)}
+
+If we emit 1 photon (jumping immediately from $\bra{411}$ to $\bra{100}$), $\omega_0=-13.6\text{ eV}\p{\frac{1}{1^2}-\frac{1}{4^2}}=\frac{-13.6\times15}{16\hbar}$. We already know our matrix element so we can siply do the integral;
+
+(Actually a short side note, I decided after doing the integral and looking at the final answer that I will approximate all energies as being $\omega_0=\frac{-13.6}{\hbar}$, the $ea_0$ term is going to so heavily dominate that it shouldn't matter.
+
+\begin{align*}
+    c_1(t)&=-\frac{iea_0}{\hbar}\int_{0}^{t}dt'\:e^{i\omega_0{t}'}\\[1em]
+    &=-\frac{ea_0}{\hbar\omega_0}\p{e^{i\omega_0t'}|_0^{t}}\\[1em]
+    &=-\frac{ea_0}{\hbar\omega_0}\p{e^{i\omega_0t}-1}
+\end{align*}
+
+So $|c_n(t)|^2$ is going to be porportional to;
+    
+\begin{align*}
+    \frac{e^2a_0^2}{\hbar^2\omega_0^2}\approx\frac{{a_0^2}}{13.6^2}\approx1.47\times10^{-23}
+\end{align*}
+
+Everything cancled out relaly nicely.
+
+% \begin{align*}
+%     |e^{-i\omega_0t}-1|^2&=2-e^{-i\omega_0t}-e^{-i\omega_0t}\\[1em]
+%     &=2-2\cos\p{\omega_0t}\\[1em]
+% \end{align*}
+
+But the other way we can do this is a three step process. That means that our total probability amplitude for that is $|c_3|^2|c_2|^2|c_1|^2$, which will result in a coefficient that is
+
+\begin{align*}
+    \frac{e^6a_0^6}{\hbar^6\omega_{43}^2\omega_{32}^2\omega_{21}^2}
+\end{align*}
+
+The factors of $\hbar$ will cancel out, but the factors of $e\alpha_0$ will not. Those are both very small numbers, and cubing them will seriously surpress that path from happening. For those reasons, the direct path is more likely.
+
+The other way we can do it (three steps), will be what we found, but cubed. $\approx3.21\times10^{-69}$
+
+\end{document}
