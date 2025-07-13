@@ -1,0 +1,100 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\usepackage{amsmath}
+% \usepackage{vartau}
+\newcommand{\p}[1]{\left(#1\right)}
+\newcommand{\braket}[1]{\langle#1\rangle}
+\newcommand{\bra}[1]{|#1\rangle}
+\newcommand{\ket}[1]{\langle#1|}
+
+\title{PHYS 417 HW4}
+\author{Aidan Gardner-O'Kearny}
+\date{May 2025}
+
+\begin{document}
+
+\maketitle
+
+Fair warning, I did not complete this homework.
+
+\section*{1)}
+\subsection*{a)}
+The geometric phase is always real, but we can show that the integral $\int_0^{t}dt'\;i\braket{\psi_n(t')|\dot{\psi}_n(t')}$ will in fact always be 0.
+
+\begin{align*}
+    \braket{\psi|\dot{\psi}}&=\frac{d}{dt}\braket{\psi|\psi}-\braket{\dot{\psi}|\psi}\\[1em]
+    \braket{\psi|\dot{\psi}}&=\frac{d}{dt}(1)-\braket{\dot{\psi}|\psi}\\[1em]
+    \braket{\psi|\dot{\psi}}&=-\braket{\dot{\psi}|\psi}
+\end{align*}
+
+Which can only be true if $\braket{\psi|\dot{\psi}}$ is purely imaginary. But because we're dealing with an ISW, all $\psi_n$ is purely real. The only way for a number to be purely real \textit{and} purely imaginary is for it to be $0$.  
+
+
+\section*{2)}
+Given a 1D ISW, $\bra{\psi}=\sin(\frac{n\pi}{a}x)$, along with a $\delta$ function $V(x)=\alpha(t)\delta(x-\frac{a}{2})$ in the middle.
+
+\subsection*{a)}
+
+If we start in the ground state $\bra{\psi}=\sin(\frac{\pi}{a}x)$ then the wave function at time $t$ will need to satisfy the requirement that $\bra{\psi(0)}=0$ as we have effectively put another "wall" in the middle of the well. As such, we will exist in the state $\bra{\psi_1}=A\sin{(\frac{2\pi}{a}x)}$
+
+This effecitvely raises the ground state energy of the system. $E_1(t\rightarrow\infty)=2E_1(t=0)$
+
+\subsection*{b)}
+
+If we start in the first excited state $\bra{\psi}=\sin(\frac{2\pi}{a}x)$ then the wave function at time $t$ will not change, as it is already symmetric about the $\delta$ function. As such $\bra{\psi_2}=\sin{(\frac{2\pi}{a}x)}$. The two states become degenerate as $t\rightarrow{\infty}$
+
+
+\subsection*{c)}
+The process that does not cost energy will be the second, as its eigenstate does not change at all. The other process will cause the energy to rasie over time.
+
+
+\section*{3)}
+
+If we start with a particle in  in the ISW of width $2L$ while we start by creating a barrier in the middle section of the well. $V(x)\rightarrow\infty$ in the region $\alpha{L}\leq{x}\leq\beta{L}$ where $1>\alpha>\beta>0$ we will have created two ISW's of width $L(1-\alpha)$ and $L(1-\beta)$
+
+\subsection*{a)}
+In the ground state $\bra{\psi(t=0)}=A\sin(\frac{\pi}{2L}x)$, if our adiabatic process happens we will notice that the larger of the two wells will accept the wave function and have it be centered there. This will happen because its energy will be lower. For the ISW, $E\propto\frac{1}{L^2}$, as a result, a smaller well will result in a higher energy.
+
+\subsection*{b)}
+If we were in the first excited state, we will now be able to end up in either well, and the size difference of the two wells will determine which one it is.
+
+\begin{align*}
+    E_n&=\frac{\hbar^2\pi^2}{2mL^2}\quad\text{so}\\[1em]
+    E_{2\alpha}&=\frac{4\hbar^2\pi^2}{2m(1-\alpha)^2L^2}\quad\text{and}\quad E_{1\beta}=\frac{\hbar^2\pi^2}{2m(1-\beta)^2L^2}
+\end{align*}
+
+So we can either shift into the first excited state of the larger well or the ground state of the smaller well. This transition happens when the two energies are equal, or when
+
+\begin{align*}
+    4(1-\beta)^2&=(1-\alpha)^2\\[1em]
+    4(\beta^2-2\beta+1)&=\alpha^2-2\alpha+1\\[1em]
+    4\beta^2-8\beta-\alpha^2+2\alpha&=-3
+\end{align*}
+
+\section*{4)}
+Starting with a spin$-\frac{1}{2}$ particle in the $\bra{\uparrow_z}$ state at $t=0$ and then being measured at integer times $t_n=nT$ in a time dependant direction $\vec{e}_n=\cos{(\frac{n\pi}{N})\vec{e}_z}+\sin{(\frac{n\pi}{N}})\vec{e}_x$
+
+\subsection*{a)}
+The eigenstates in direction $\vec{e}_n$ are going to be in the $xz$ plane (no chance of measuring a spin in the $y$ direction), and so a spin expressed in that direction as a function of some angle $\theta$ will be;
+
+\begin{align*}
+    \bra{\uparrow}_n&=\cos{\frac{\theta}{2}}\bra{\uparrow}_z+\sin{\frac{\theta}{2}}\bra{\downarrow}_z\\[1em]
+    \bra{\downarrow}_n&=\sin{\frac{\theta}{2}}\bra{\uparrow}_z-\cos{\frac{\theta}{2}}\bra{\downarrow}_z
+\end{align*}
+
+(Taken from Griffiths problem 4.33)
+
+Our measurement operator will be $\cos(\frac{n}{N\pi})\sigma_z+\sin(\frac{n}{N\pi})\sigma_x$
+
+Which implies that our measurement (of the form $S_r\bra{s,m}=m\bra{s.m}$ will take the form
+
+\begin{align*}
+    \p{\cos(\frac{n}{N\pi})\sigma_z+\sin(\frac{n}{N\pi})\sigma_x)}\p{\cos(\frac{\theta}{2})\bra{\uparrow}_z+\sin(\frac{\theta}{2})\bra{\downarrow}_z}&=\frac{1}{2}\p{\cos(\frac{\theta}{2})\bra{\uparrow}_z+\sin(\frac{\theta}{2})\bra{\downarrow}_z}\\[1em]
+    \p{}&=
+\end{align*}
+
+\subsection*{b)}
+
+
+\end{document}
