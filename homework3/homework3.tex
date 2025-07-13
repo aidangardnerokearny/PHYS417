@@ -1,0 +1,206 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{PHYS 417 HW 2}
+\author{Aidan Gardner-O'Kearny}
+\date{April 2025}
+\usepackage{amsmath}
+% \usepackage{vartau}
+\newcommand{\p}[1]{\left(#1\right)}
+\newcommand{\braket}[1]{\langle#1\rangle}
+\newcommand{\bra}[1]{|#1\rangle}
+\newcommand{\ket}[1]{\langle#1|}
+
+\begin{document}
+
+\maketitle
+
+\section*{1)}
+
+For the hyperfine line in Hydrogen, $A\approx2.9\times10^{-15}\text{ s}^{-1}$.
+
+\subsection*{a)}
+This is not allowed via dipole transition it would need to obey the transition rules.
+\begin{align*}
+    \Delta{\ell}&\equiv{\ell'}-\ell=\pm1\\[1em]
+    \Delta{m}&\equiv{m'}-m=0\text{ or }\pm1
+\end{align*}
+
+The hyperfine line comes from a transition from $\bra{n\ell{m}}$ to $\bra{n'\ell'm'}$ Under these rules, the hyperfine splitting transition is not allowed because $\bra{n'\ell'm'}=\bra{n\ell{m}}$, it's just that the total spin of the configuration is different.
+
+Additionally, 
+
+\subsection*{b)}
+
+% If we were considering a dipole transition with $|p|=ea_0$ we could note that $\lambda=2.1\times10^{-1}\text{ m}=\frac{2\pi{c}}{\omega}$ so $\omega=\frac{2\pi{c}}{2.1\times10^{-1}\text{ m}}$.
+
+If we were considering a dipole transition with $|p|=ea_0$ we could note that $\lambda=2.1\times10^{-1}\text{ m}$ corresponds to $E=\frac{\hbar{c}}{\lambda}=\hbar\omega_0$ so $\omega_0=\frac{c}{\lambda}$.
+
+From Griffiths 11.63
+
+\begin{align*}
+    A'&=\frac{\omega_0^3|p|^2}{3\pi\epsilon_0\hbar{c^3}}\\[1em]
+    &=\frac{|p|^2}{3\pi\epsilon_0\hbar\lambda^3}\\[1em]
+    &=\frac{e^2a_0^2}{3\pi\epsilon_0\hbar\lambda^3}
+\end{align*}
+
+Which we know all the values of, so we can calculate $A'$.
+
+\begin{align*}
+    A'&=1.4\times10^{-13}\times(2\pi)^3\\[1em]
+    &=2.18\times10^{-10}\text{ s}^{-1}
+\end{align*}
+
+Which is several orders of magnitude faster than the actual transition rate.
+
+\subsection*{c)}
+We can now approximate the actual decay rate by noting that this will be due to a magnetic dipole, using the substitution $p=ea_0=\frac{\mu_B}{c}$
+
+The ratio $\frac{\mu_B}{cea_0}$ is equal to $\approx0.037$. Which means that if we multiply by that ratio squared;
+
+$A''=A'(0.0036)^2=2.9\times10^{-15}\text{ s}^{-1}$
+Which is exactly what we want.
+
+\section*{2)}
+\subsection*{a)}
+
+Starting with the typical 1D QHO Hamiltonian $\hat{H}=\hbar\omega\p{a^\dagger{a}+\frac{1}{2}}$ and try to calculate the expectation value of a coherent state $\bra{\alpha}$ we calculate 
+
+\begin{align*}
+    E_\alpha=\braket{\alpha|H|\alpha}=\braket{\alpha|\hbar\omega\p{a^\dagger{a}+\frac{1}{2}}|\alpha}
+\end{align*}
+
+We remember that the coherent states can be expanded in terms of the number states $\bra{n}$
+
+\begin{align*}
+    \bra{\alpha}=\sum_{n}^{\infty}a_n\bra{n}
+\end{align*}
+
+Which, when subbed in yields
+
+\begin{align*}
+    E_\alpha&=\hbar\omega\sum_{n}^{\infty}\braket{a_n^\star{n}|\p{a^\dagger{a}+\frac{1}{2}}|a_nn}\\[1em]
+    &=\hbar\omega\sum_{n}^{\infty}|a_n|^2\p{\braket{n|a^\dagger{a}|n}+\frac{1}{2}\braket{n|n}}\\[1em]
+    &=\hbar\omega\sum_{n}^{\infty}|a_n|^2\p{n+\frac{1}{2}}
+\end{align*}
+\subsection*{b)}
+
+The variance is defined as $\sigma^2=\braket{j^2}-\braket{j}^2$. We already know $\braket{H}$, so $\braket{H}^2$ is trivial. We must now calculate $\braket{H^2}$
+
+\begin{align*}
+    \hat{H}^2=\hbar^2\omega^2\p{a^\dagger{a}a^\dagger{a}+a^\dagger{a}+\frac{1}{4}}
+\end{align*}
+
+So this means that $\braket{\hat{H}^2}$ is
+
+\begin{align*}
+    \braket{\hat{H}^2}&=\hbar^2\omega^2\sum_{n}^{\infty}|a_n|^2\braket{n|\p{a^\dagger{a}a^\dagger{a}+a^\dagger{a}+\frac{1}{4}}|n}\\[1em]
+    &=\hbar^2\omega^2\sum_{n}^{\infty}|a_n|^2\p{\braket{n|n^2|n}+\braket{n|n|n}+\frac{1}{4}\braket{n|n}}\\[1em]
+    &=\hbar^2\omega^2\sum_{n}^{\infty}|a_n|^2\p{n+\frac{1}{2}}^2
+\end{align*}
+
+And, quickly calculating $\braket{H}^2$
+
+\begin{align*}
+    \braket{H}^2&=\hbar^2\omega^2\sum_n|a_n|^4\p{n+\frac{1}{2}}^2
+\end{align*}
+
+So $\sigma^2$ is
+
+\begin{align*}
+    \sigma^2&=\hbar^2\omega^2\sum_{n}^{\infty}|a_n|^2\p{n+\frac{1}{2}}^2-\hbar^2\omega^2\sum_n|a_n|^4\p{n+\frac{1}{2}}^2\\[1em]
+    &=\sum_n\p{1-|a_n|^2}
+\end{align*}
+
+Which actually makes some amount of sense, if we are only allowed 1 state, there is no variance.
+
+\section*{3)}
+
+If we try to construct a state $\bra{\gamma}$ such that
+
+\begin{align*}
+    a^\dagger\bra{\gamma}=\gamma\bra{\gamma}
+\end{align*}
+
+We can start out with the expansion
+
+\begin{align*}
+    \bra{\gamma}=\sum_{n}^{\infty}c_n\bra{n}
+\end{align*}
+
+and sub
+
+\begin{align*}
+    a^\dagger\sum_{n}^{\infty}c_n\bra{n}&=\gamma\sum_{n}^{\infty}c_n\bra{n}\\[1em]
+    \sum_{n}^{\infty}c_na^\dagger\bra{n}&=\gamma\sum_{n}^{\infty}c_n\bra{n}\\[1em]
+    \sum_{n}^{\infty}c_n\sqrt{n+1}\bra{n+1}&=\gamma\sum_{n}^{\infty}c_n\bra{n}
+\end{align*}
+
+Which will clearly never be equal
+
+\section*{4)}
+We have a 50/50 beam splitter as set up in the lecture, two inputs, $1, 2$ and two outputs $3, 4$. We are interested in the ratio
+
+\begin{align*}
+    G=\frac{N_{3,4}}{N_3N_4}
+\end{align*}
+
+With $N_k$ and $N_{3,4}$ being defined as
+
+\begin{align*}
+    N_k&=\sum_{n_k}P(n_k)n_k\\[1em]
+    N_{3,4}&=\sum_{n_3,n_4}P(n_3,n_4)n_3n_4
+\end{align*}
+
+From class, we know that this is dependant on Poisonnian statistics, with $P(n_k)=\p{\frac{|\alpha|^2}{2n_k!}^{n_k}}\times\text{exp}\p{\frac{-|\alpha|^2}{2}}$. $P(n_3,n_4)$ is $P(n_3)P(n_4)$.
+
+\subsection*{a)}
+If we send a coherent state $\bra{\alpha}$ into input 1 and $\bra{0}$ into input 2, $G$ will be a function of the amplitudes $\bra{\alpha}_3$ and $\bra{\alpha}_4$. These are;
+
+\begin{align*}
+    \alpha_3&=\frac{\alpha_1+i\alpha_2}{\sqrt{2}}\\[1em]
+    \alpha_4&=\frac{\alpha_2+i\alpha_1}{\sqrt{2}}
+\end{align*}
+
+So, with $\alpha_1=\alpha$ and $\alpha_2=0$
+
+\begin{align*}
+    |\alpha_3|^2=|\alpha_4|^2=\frac{\alpha}{2}
+\end{align*}
+
+But aha, the Poissonian statistics as play here, we can point out $P(n_3,n_4)=P(n_3)P(n_4)$, and so $G$ will simply be 1.
+
+\begin{align*}
+    G&=\frac{N_{3,4}}{N_3N_4}\\[1em]
+    &=\frac{P(n_3,n_4)n_3n_4}{P(n_3)n_3P(n_4)n_4}\\[1em]
+    &=\frac{P(n_3)n_3P(n_4)n_4}{P(n_3)n_3P(n_4)n_4}\\[1em]
+    &=1
+\end{align*}
+
+\subsection*{b)}
+If we send $\bra{\alpha}$ into input 1 and $\bra{\beta}$ into input 2, $G$ will still be 1. We can make the same argument.
+
+\begin{align*}
+    G&=\frac{N_{3,4}}{N_3N_4}\\[1em]
+    &=\frac{P(n_3,n_4)n_3n_4}{P(n_3)n_3P(n_4)n_4}\\[1em]
+    &=\frac{P(n_3)n_3P(n_4)n_4}{P(n_3)n_3P(n_4)n_4}\\[1em]
+    &=1
+\end{align*}
+
+Even though $\alpha_3$ and $\alpha_4$ have an additional term in them, everything will still cancel out.
+
+\subsection*{c)}
+We now send the \textit{number} states $\bra{n}$ and $\bra{0}$ into inputs 1 and 2. Our argument is no longer true, and the input state will be ;
+
+\begin{align*}
+    \bra{\psi}_{in}&=\frac{(a_1^\dagger)^n}{\sqrt{n!}}\bra{n}_1\bra{0}_2\\[1em]
+\end{align*}
+
+so $\bra{\psi}_{out}$ is 
+
+\begin{align*}
+    \bra{\psi}_{out}&=\frac{}{}
+\end{align*}
+
+
+\end{document}
