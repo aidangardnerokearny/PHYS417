@@ -1,0 +1,307 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+
+\usepackage[letterpaper,top=2.5cm,bottom=2.5cm,left=3.75cm,right=3.75cm,marginparwidth=1.75cm]{geometry}
+\newcommand{\p}[1]{\left(#1\right)}
+\newcommand{\braket}[1]{\langle#1\rangle}
+
+\title{PHYS 417 HW 1}
+\author{Aidan Gardner-O'Kearny}
+\date{March 2025}
+
+\begin{document}
+
+\maketitle
+
+\section*{1)}
+\subsection*{a)}
+
+Using the trial wave function $\psi(x)=Ae^{-k|x|}$ while in the potential $V(x)=-\alpha\delta\p{x}$ for $\alpha>0$ we can say that $$\langle\psi|\hat{H}|\psi\rangle\geq{E_{gs}}$$
+
+This means that \[
+    |A|^2\int_{-\infty}^{\infty}dx\:e^{-k|x|}[\frac{-\hbar^2}{2m}\frac{d^2}{dx^2}-\alpha\delta(x)]e^{-k|x|}\geq{E_{gs}}
+\]
+
+The second derivative of the absolute value function is a little nasty.
+\begin{align*}
+    \frac{d}{dx}|x|&=2\Theta\p{x}-1\\[1em]
+    \frac{d^2}{dx^2}|x|&=2\delta\p{x}
+\end{align*}
+
+Which will help us out some. We already know what $A$ is, from Chapter 2: $A=\sqrt{k}$ for a wavefunction of this form. Can now get to solving.
+
+We have two integrals, the potential term and the kinetic term. Starting with the kinetic term:
+
+\begin{align}
+    \braket{T}&=\frac{-k\hbar^2}{2m}\int_{-\infty}^{\infty}dx\:e^{-k|x|}\frac{d^2}{dx^2}e^{-k|x|}\\[1em]
+    &=\frac{-k\hbar^2}{2m}\int_{-\infty}^{\infty}dx\:e^{-k|x|}\frac{d}{dx}ke^{-k|x|}\p{2\Theta(x)-1}\\[1em]
+    &=\frac{-k\hbar^2}{2m}\int_{-\infty}^{\infty}dx\:e^{-k|x|}\p{-2ke^{-k|x|}\delta{(x)}+k^2e^{-k|x|}}\\[1em]
+\end{align}
+
+That derivative was done in class, I'm going to trust it. Continuing;
+
+\begin{align*}
+    &=\frac{-k\hbar}{2m}\p{-2k\int_{-\infty}^{\infty}dx\:e^{-2k|x|}\delta(x)+k^2\int_{-\infty}^{\infty}dx\:e^{-2k|x|}}\\[1em]
+    &=\frac{-k\hbar}{2m}\p{-2k+2k^2\int_{0}^{\infty}dx\:e^{-2kx}}\\[1em]
+    &=\frac{-k\hbar^2}{2m}\p{-2k+k}=\frac{k^2\hbar^2}{2m}
+\end{align*}
+
+The potential term $\braket{V}$ will be
+\begin{align*}
+    \braket{V}&=-\alpha{k}\int_{-\infty}^{\infty}dx\:e^{-2k|x|}\delta(x)\\[1em]
+    &=-\alpha{k}
+\end{align*}
+
+All together $\braket{H}$
+
+\begin{align*}
+    \braket{H}=\braket{T}+\braket{V}=\frac{k^2\hbar^2}{2m}-\alpha{k}
+\end{align*}
+
+To minimize this value;
+
+\begin{align*}
+    \frac{d\braket{H}_k}{dk}=0&=\frac{k\hbar^2}{m}-\alpha\\[1em]
+    \alpha&=\frac{k\hbar^2}{m}\\[1em]
+    k&=\frac{\alpha{m}}{\hbar^2}
+\end{align*}
+
+\begin{align*}
+    \braket{H}_{min}&=\frac{\alpha^2m}{2\hbar^2}-\frac{\alpha^2m}{\hbar^2}\\[1em]
+    &=\frac{-\alpha^2m}{2\hbar^2}
+\end{align*}
+
+Which is in fact the exact ground state of the $\delta$ potential!
+
+\subsection*{b)}
+The odd trial wave function is $\psi_{odd}=Axe^{-k|x|}$.
+
+\begin{align*}
+    \braket{V}&=-\beta|A|^2\int_{-\infty}^{\infty}dx\:\delta(x)x^2e^{-2k|x|}\\[1em]
+    &=0
+\end{align*}
+
+By definition, $\braket{T}\geq0$, so $\braket{H}\geq0$, meaning that any excited state will be a scattering state rather than a bound state.
+\section*{2)}
+To estimate the ground state of the 3-D harmonic oscillator, we will use the variational method:$$\langle\psi|\hat{H}|\psi\rangle\geq{E_{gs}}$$
+
+The trial wave function is $$\psi(r)=Ne^{-\alpha(r)}$$
+
+With the potential $$V(r)=\frac{1}{2}m\omega^2r^2$$ this seems pretty plug and play.
+
+$$E_{gs}\leq\int{d^3r}\:\psi^\star{H}\psi$$
+
+Our wave function only has dependence on $r$, so the momentum squared term $\hat{p}^2=-\hbar^2\hat\nabla^2$ becomes: $\hat{p}^2=-\frac{\hbar^2}{r^2}\partial_r\p{r^2\partial_r}$ meaning the Hamiltonian reads:
+
+\begin{align*}
+    \hat{H}=-\frac{\hbar^2}{2mr^2}\partial_r\p{r^2\partial_r}+\frac{1}{2}m\omega^2r^2
+\end{align*}
+
+We will again have two integrals to solve. $\braket{\hat{H}}=\braket{\hat{T}}+\braket{\hat{V}}$
+
+Let's get the normalization factor out of the way real quickly. Going to use Griffiths' solutions for the exponential integral(s).
+
+\begin{align*}
+    1&=\int{d^3r}\:\psi^\star\psi\\[1em]
+    &=|N|^2\int{dA}\int_{0}^{\infty}dr\:r^2e^{-2\alpha{r}}\\[1em]
+    &=4\pi|N|^22!\p{\frac{1}{2\alpha}}^{3}\\[1em]
+    \frac{\alpha^3}{\pi}&=|N|^2\\[1em]
+    N&=\sqrt{\frac{\alpha^3}{\pi}}
+\end{align*}
+
+The $\braket{\hat{V}}$ term will be simpler.
+
+\begin{align*}
+    \braket{{V}}&=N^2\int{dA}\int_{0}^{\infty}dr\:r^2\frac{1}{2}m\omega^2r^2e^{-2\alpha{r}}\\[1em]
+    &=2\pi{m}\omega^2{N^2}\int_{0}^{\infty}dr\:r^4e^{-2\alpha{r}}\\[1em]
+    &=2\pi{m}\omega^2N^24!\p{\frac{1}{2\alpha}}^{5}\\[1em]
+    &=2\pi{m}\omega^2\frac{2\alpha^3}{\pi}24\p{\frac{1}{\alpha}}^5=\frac{3m\omega^2}{2\alpha^2}
+\end{align*}
+
+The $\braket{T}$ term will be:
+
+\begin{align*}
+    \braket{T}&=\frac{-N^2\hbar^2}{2m}\int{dA}\int_{0}^{\infty}dr\:r^2e^{-\alpha{r}}[\partial_r\p{r^2\partial_r}]e^{-\alpha{r}}\\[1em]
+    &=\frac{-4\alpha^3\hbar^2}{m}\int_{0}^{\infty}dr\:r^2e^{-\alpha{r}}\partial_r\p{-\alpha{r^2}e^{-\alpha{r}}}\\[1em]
+    &=\frac{4\alpha^4\hbar^2}{m}\int_{0}^{\infty}dr\:r^2e^{-\alpha{r}}\p{2re^{-\alpha{r}}-\alpha{r^2}e^{-\alpha{r}}}\\[1em]
+    &=\frac{4\alpha^4\hbar^2}{m}\p{\int_{0}^{\infty}dr\:2r^3e^{-2\alpha{r}}-\int_{0}^{\infty}dr\:\alpha{r^4}e^{-2\alpha{r}}}\\[1em]
+    &=\frac{4\alpha^4\hbar^2}{m}\p{\frac{3}{4\alpha^2}}=\frac{3\alpha^2\hbar^2}{m}
+\end{align*}
+
+Thus $\braket{H}=\frac{3\alpha^2\hbar^2}{m}+\frac{3m\omega^2}{2\alpha^2}$
+
+To minimize;
+
+\begin{align*}
+    \frac{d\braket{H}_\alpha}{d\alpha}=0&=\frac{6\alpha\hbar^2}{m}-\frac{3m\omega^2}{\alpha^3}\\[1em]
+    \frac{3m\omega^2}{\alpha^3}&=\frac{6\alpha\hbar^2}{m}\\[1em]
+    \alpha^4&=\frac{m^2\omega^2}{2\hbar^2}\\[1em]
+    \alpha&=\p{\frac{m^2\omega^2}{2\hbar^2}}^{1/4}
+\end{align*}
+
+We can now plug this in and see that our minimized value of $\braket{H}$ is:
+
+\begin{align*}
+    \braket{H}_{min}&=\frac{3\hbar^2}{2m}\frac{m\omega}{2^{1/2}\hbar}+\frac{3m\omega^2}{2}\frac{2^{1/2}\hbar}{m\omega}\\[1em]
+    &=\frac{3\hbar\omega}{2^{3/2}}+\frac{3\hbar\omega}{2^{1/2}}\\[1em]
+    &=4\sqrt{3}\hbar\omega
+\end{align*}
+
+Which certainly has the right units, but is much higher than the actual ground state energy for the 3-D harmonic oscillator, $\frac{3}{2}\hbar\omega$
+
+\section*{3)}
+
+If we have a potential in 1-D where $V(x)<0$ for all $x$ we can show that there is at least one bound state by utilizing the variational method. $$\langle\psi|\hat{H}|\psi\rangle\geq{E_{gs}}$$
+
+In this way we can show that if $E_{gs}$ is less than $0$, there will be at least one bound state.
+
+Our "potential" $V$ will be most simple if we define it as $V=-\alpha\delta(x)$, which is indeed, never positive, and negative in at least one place. We will be able to construct arbitrary potentials as sums of any number of $\delta$-functions. More on that later.
+
+For now, $\braket{H}=\braket{T}+\braket{V}$; and we'll use a Gaussian of the form $\psi_b=Ae^{-bx^2}$ as a test wave function.
+
+\begin{align*}
+    1&=|A|^2\sqrt{\p{\int_{-\infty}^{\infty}dx\:e^{-2bx^2}}^2}=|A|^2\sqrt{\int_{-\infty}^{\infty}dx\:e^{-2bx^2}\int_{-\infty}^{\infty}dy\:e^{-2by^2}}\\[1em]
+    &=|A|^2\sqrt{\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}dxdy\:e^{-2b(x^2+y^2)}}\\[1em]
+    &=|A|^2\sqrt{\int{}d^2r\:e^{-2br^2}}=|A|^2\sqrt{\int_{0}^{2\pi}d\theta\int_{0}^{\infty}dr\:re^{-2br^2}}\\[1em]
+    &=|A|^2\sqrt{2\pi\int_{-\infty}^{0}du\:\frac{1}{4b}e^{u}} \quad \p{u=-2br^2,\:du=-4br\,dr}\\[1em]
+    &=\sqrt{\frac{\pi}{2b}}|A|^2\\[1em]
+    A&=\p{\frac{2b}{\pi}}^{1/4}
+\end{align*}
+
+I feel I have now shown I know how to calculate Gaussian integrals. I will now be using integral calculators to do them from now on.
+
+\begin{align*}
+    \braket{T}&=\frac{-\hbar^2}{2m}|A|^2\int_{-\infty}^{\infty}dx\:e^{-bx^2}\frac{d^2}{dx^2}e^{-bx^2}\\[1em]
+    &=\frac{-2b\hbar^{2}}{2m}|A|^2\int_{-\infty}^{\infty}dx\:\p{2bx^2e^{-2bx^2}-e^{-2bx^2}}\\[1em]
+    &=\frac{b\hbar^2}{m}|A|^2\p{\frac{1}{2}\sqrt{\frac{\pi}{2b}}}\\[1em]
+    &=\frac{b\hbar^2}{2m}\p{\frac{2b}{\pi}}^{1/2}\p{\frac{1}{2}\sqrt{\frac{\pi}{2b}}}\\[1em]
+    &=\frac{b\hbar^2}{4m}
+\end{align*}
+
+The potential term $\braket{V}$ will be much simpler to calculate;
+
+\begin{align*}
+    \braket{V}&=-\alpha|A|^{2}\int_{-\infty}^{\infty}dx\:\delta(x)e^{-2bx^2}\\[1em]
+    &=-\alpha|A|^{2}\\[1em]
+    &=-\alpha\p{\frac{2b}{\pi}}^{1/2}\\[1em]    
+\end{align*}
+
+Thus
+\begin{align*}
+    \braket{H}_{b}=\frac{b\hbar^2}{4m}-\alpha\p{\frac{2b}{\pi}}^{1/2}
+\end{align*}
+
+To minimize;
+
+\begin{align*}
+    \frac{d\braket{H}_b}{db}=0&=\frac{\hbar^2}{4m}-\alpha\p{\frac{1}{2\pi{b}}}^{1/2}\\[1em]
+    \frac{\hbar^2}{4m}&=\alpha\p{\frac{1}{2\pi{b}}}^{1/2}\\[1em]
+    \frac{\hbar^4}{16m^2\alpha^2}&=\frac{1}{2\pi{b}}\\[1em]
+    b&=\frac{8m^2\alpha^2}{\pi\hbar^4}
+\end{align*}
+
+So $\braket{H}_{min}$ is
+
+\begin{align*}
+    \braket{H}_{min}&=\frac{2m\alpha^2}{\pi\hbar^2}-\alpha\p{\frac{16m^2\alpha^2}{\pi^2\hbar^4}}^{1/2}\\[1em]
+    &=\frac{2m\alpha^2}{\pi\hbar^2}-\frac{4m\alpha^2}{\pi\hbar^2}\\[1em]
+    &=-\frac{2m\alpha^2}{\pi\hbar^2}
+\end{align*}
+
+Which is negative (bound state) and is greater than the actual ground state energy.
+
+This generalizes to any potential $V$ that is negative in at least one place and never positive by ...
+
+\section*{4)}
+Back to the 1-D $\delta$ potential. $$V(x)=-\beta\delta\p{x}$$
+
+We have been given a triangular wave function defined piecewise as follows:
+
+\begin{align*}
+   \psi_a(x)=\langle{x}|\psi_a\rangle=\begin{cases}
+       \sqrt{\frac{3}{2a^3}}\p{a-x}\quad &\text{for}\quad 0\leq{x}\leq{a}\\[1em]
+   \sqrt{\frac{3}{2a^3}}\p{x+a}\quad&\text{for}\quad -a\leq{x}\leq{0}\\[1em]
+   0\quad &\text{for}\quad |x|>{a}
+   \end{cases}
+\end{align*}
+
+\subsection*{a)}
+Calculating the expectation value of the potential energy $\langle\psi|\hat{V}|\psi\rangle$ we can make note of that fact that $V=0$ for $x\neq0$, which makes us only have to calculate the contributions from that point. (Also note that $\psi_a$ is continuous at $x=0$)
+
+\begin{align*}
+    \langle\psi|\hat{V}|\psi\rangle&=-\int_{-a}^adx\:\sqrt{\frac{3}{2a^3}}(a-x)\beta\delta(x)\sqrt{\frac{3}{2a^3}}(a-x) \\[1em]
+    &=-\frac{3\beta}{2a^3}\int_{-a}^{a}dx\:\delta(x)(a-x)^2\\[1em]
+    &=-\frac{3\beta}{2a^3}a^2=-\frac{3\beta}{2a}
+\end{align*}
+
+To verify the units of our answer we make use of the fact that $\delta\p{\alpha{x}}=\frac{1}{|\alpha|}\delta\p{x}$ to sow that the delta function returns in the inverse of its argument. This means that a bare delta function has units of $\frac{1}{\text{length}}$. This implies that $\beta$ must have units of $\text{energy}\times\text{length}$. Our final answer is proportional to $\frac{\beta}{a}$ so the length term will cancel out, leaving us with just energy.
+
+\subsection*{b)}
+Calculating the expectation value of the kinetic energy $\braket{T}$ will be a little more tricky due to discontinuities.
+
+\begin{align*}
+    \frac{d\psi}{dx}&=\begin{cases}
+    -\sqrt{\frac{3}{2a}}\quad& \text{for}\quad 0\leq{x}\leq{a}\\[1em]
+    \sqrt{\frac{3}{2a}}\quad& \text{for}\quad -a\leq{x}\leq{0}\\[1em]
+    0\quad & \text{for} \quad |x|> a
+    \end{cases}
+\end{align*}
+
+
+
+This is a step function, so the second derivative is;
+
+\begin{align*}
+    \frac{d^2\psi}{dx^2}&=\sqrt{\frac{3}{2a}}\delta(x+a)-\sqrt{\frac{6}{a}}\delta(x)+\sqrt{\frac{3}{2a}}\delta(x-a)
+\end{align*}
+
+The kinetic energy term;
+
+\begin{align*}
+    \braket{T}&=-\frac{3\hbar^2}{4ma^3}\int_{-a}^{a}dx\:(a-|x|)\frac{d^2}{dx^2}(a-|x|)\\[1em]
+    &=-\frac{3\hbar^2}{4ma^3}\int_{-a}^{a}dx\:(a-|x|)\p{\delta(x-a)-2\delta(x)+\delta(x+a)}\\[1em]
+    &=\frac{3\hbar^2}{2ma^2}
+\end{align*}
+
+Which does, in fact, have the correct units.
+
+\subsection*{c)}
+We can now see what the expectation value of our total energy is as a function of $a$
+
+\begin{align*}
+    \braket{H}=\braket{T}+\braket{V}&=-\frac{3\beta}{2a}+\frac{3\hbar^2}{2ma^2}
+\end{align*}
+
+We must now minimize $\braket{H}_a$
+
+\begin{align*}
+    \frac{d\braket{H}_a}{da}=0&=\frac{3\beta}{2a^2}-\frac{3\hbar^2}{ma^3}\\[1em]
+    &=\frac{3\beta{a}{m}}{2ma^3}-\frac{6\hbar^2}{2ma^3}\\[1em]
+    &=3\beta{a}m-6\hbar^2\\[1em]
+    a&=\frac{2\hbar^2}{\beta{m}}
+\end{align*}
+
+Now we can plug this in;
+
+\begin{align*}
+    \braket{H}_{min}&=-\frac{3m\beta^2}{4\hbar^2}+\frac{3m\beta^2}{8\hbar^2}\\[1em]
+    &=\frac{-3m\beta^2}{8\hbar^2}
+\end{align*}
+
+This has the same units as, and is larger than $-\frac{m\beta^2}{2\hbar^2}$
+
+\subsection*{d)}
+What if we used the wave function $$\psi(x)=\p{\frac{2b}{\pi}}^{1/4}e^{-bx^2}$$
+
+Instead?
+\subsubsection*{i)}
+The main advantage this would have over the triangle wave function would be the fact that there are no zeros for the Gaussian. The triangle wave function,, on the other hand, is not smooth at $x=0$, where the potential is actually located.
+
+\subsubsection*{ii)}
+Both the Gaussian and triangle wave functions are shaped similarly, and as such share the trait where their "width" can be adjusted to minimize both $\braket{T}$ and $\braket{V}$. They both are symmetric functions (similar to the actual solution) with their maximum at $x=0$ (again, like the actual solution).
+
+
+
+
+\end{document}
